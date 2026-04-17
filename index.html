@@ -1209,28 +1209,35 @@
                         <a class="contact-link" href="#"><span></span> Hattiban, Lalitpur, Nepal</a>
                     </div>
                 </div>
-                <div class="contact-form" id="contactForm">
-                    <div class="form-group">
-                        <label class="form-label">Your Name</label>
-                        <input class="form-input" id="cf-name" type="text" placeholder="Your Name" />
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Email</label>
-                        <input class="form-input" id="cf-email" type="email" placeholder="you@example.com" />
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Subject</label>
-                        <input class="form-input" id="cf-subject" type="text"
-                            placeholder="Internship / Collaboration / Project" />
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Message</label>
-                        <textarea class="form-textarea" id="cf-message"
-                            placeholder="Tell me about your project or opportunity..."></textarea>
-                    </div>
-                    <div id="form-status" class="form-status"></div>
-                    <button class="btn-primary" id="sendBtn" onclick="handleFormSubmit()" style="cursor:none;">Send
-                        Message →</button>
+                <form id="contact-form" class="contact-form" action="https://formspree.io/f/xjgjyqdl" method="POST">
+    <div class="form-group">
+        <label class="form-label">Your Name</label>
+        <input class="form-input" type="text" name="name" placeholder="Your Name" required />
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Email</label>
+        <input class="form-input" type="email" name="email" placeholder="you@example.com" required />
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Subject</label>
+        <input class="form-input" type="text" name="subject"
+            placeholder="Internship / Collaboration / Project" />
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Message</label>
+        <textarea class="form-textarea" name="message"
+            placeholder="Tell me about your project or opportunity..." required></textarea>
+    </div>
+    <div id="form-status" class="form-status"></div>
+    <button class="btn-primary" type="submit" style="cursor:none;">
+        Send Message →
+    </button>
+
+</form>
+                    
                 </div>
             </div>
         </div>
@@ -1261,34 +1268,8 @@
         document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
         // Form handler - mailto fallback
-        function handleFormSubmit() {
-            const name = document.getElementById('cf-name').value.trim();
-            const email = document.getElementById('cf-email').value.trim();
-            const subject = document.getElementById('cf-subject').value.trim();
-            const message = document.getElementById('cf-message').value.trim();
-            const status = document.getElementById('form-status');
-            status.className = 'form-status'; status.style.display = 'none';
-
-            if (!name || !email || !message) {
-                status.textContent = 'Please fill in all required fields.';
-                status.className = 'form-status error';
-                return;
-            }
-            const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailReg.test(email)) {
-                status.textContent = 'Please enter a valid email address.';
-                status.className = 'form-status error';
-                return;
-            }
-
-            // Build mailto link
-            const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
-            const mailto = `mailto:sprihasharma098@gmail.com?subject=${encodeURIComponent(subject || 'Portfolio Inquiry — ' + name)}&body=${encodeURIComponent(body)}`;
-            window.location.href = mailto;
-
-            status.textContent = '✓ Opening your mail client... If it doesn\'t open, email sprihasharma098@gmail.com directly.';
-            status.className = 'form-status success';
-        }
+        
+        
 
         // Smooth active nav
         const sections = document.querySelectorAll('section,[id]');
